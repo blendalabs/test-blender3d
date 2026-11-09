@@ -29,7 +29,7 @@ Welcome, and thanks for taking the time. This test mirrors the kind of work we d
 
 ## Constraints
 
-- **Time box:** 8-10 hours, spread over about 5 days. Please don't go over; tell us what you'd do with more time instead.
+- **Time box:** 6-8 hours, spread over about 3-5 days. Please don’t go over; tell us what you'd do with more time instead.
 - **Stack:** any language or framework for the app layer. The Blender side must be Python (`bpy`).
 - **AI tools:** any AI coding tools are allowed, but you must disclose which ones you used.
 - **Security:** do not execute arbitrary LLM-generated code unsandboxed. How you handle this is part of the evaluation.
