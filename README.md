@@ -9,8 +9,34 @@ Welcome, and thanks for taking the time. This test mirrors the kind of work we d
 ## What we provide
 
 - An LLM API key with a spending cap. Never commit it to the repo; load it from an environment variable.
-- A rigged humanoid `.blend` file (named bones, neutral T-pose or A-pose)
-- Possibly: A short bone and pose reference sheet
+- The starter rig, in [`rig/`](rig/):
+  - [`humanoid_rig.blend`](rig/humanoid_rig.blend): armature `Humanoid_Rig` (22 named bones) and mesh `Humanoid_Mesh`, in an A-pose.
+  - [`REFERENCE.md`](rig/REFERENCE.md): conventions, bone table, rotation limits, and which way each axis moves each bone. Read this first.
+  - [`poses.json`](rig/poses.json): nine reference poses (`rest`, `t_pose`, `wave`, `shrug`, `surprised`, `thinking`, `point`, `sit`, `walk_contact`) as per-bone Euler rotations in degrees. You may use them as a pose library or as examples for your prompt.
+  - [`pose_sheet.png`](rig/pose_sheet.png): a preview of all nine poses.
+
+![Pose sheet: rest, t_pose, wave, shrug, surprised, thinking, point, sit, walk_contact](rig/pose_sheet.png)
+
+## Setup
+
+- Python 3.13. The `bpy` wheel must match your Python version, so other versions will fail to install.
+- Install Blender's Python module in a virtual environment: `pip install -r requirements.txt` (pins `bpy==5.2.3`). Installing Blender itself and using its bundled Python also works if you prefer.
+- Verify the rig loads:
+
+  ```bash
+  python -c "import bpy; bpy.ops.wm.open_mainfile(filepath='rig/humanoid_rig.blend'); print([b.name for b in bpy.data.objects['Humanoid_Rig'].pose.bones])"
+  ```
+
+- Rendering works headless with the `bpy` module. The Eevee engine needs a working GPU/OpenGL driver; if it fails on your machine, Cycles on CPU works (slower) and is fine for this test.
+
+## Rig rules
+
+The details are in [`rig/REFERENCE.md`](rig/REFERENCE.md); the essentials:
+
+- Z is up, the character faces -Y, and the character's left side is +X (bones ending in `.L`).
+- All pose bones use Euler XYZ, local rotations. Use degrees in your JSON and convert to radians for Blender.
+- Only `root` and `hips` take location; every other bone is rotation only.
+- Elbows and knees bend in negative X. Limit Rotation constraints enforce joint limits and clamp values outside them. Do not remove the constraints; your validation should handle limits before they are hit.
 
 ## Core requirements
 
@@ -29,7 +55,7 @@ Welcome, and thanks for taking the time. This test mirrors the kind of work we d
 
 ## Constraints
 
-- **Time box:** 6-8 hours, spread over about 3-5 days. Please don’t go over; tell us what you'd do with more time instead.
+- **Time box:** 6-8 hours, spread over about 3-5 days. Please don't go over; tell us what you'd do with more time instead.
 - **Stack:** any language or framework for the app layer. The Blender side must be Python (`bpy`).
 - **AI tools:** any AI coding tools are allowed, but you must disclose which ones you used.
 - **Security:** do not execute arbitrary LLM-generated code unsandboxed. How you handle this is part of the evaluation.
