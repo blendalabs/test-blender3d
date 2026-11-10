@@ -6,52 +6,99 @@
     "forward": "-Y",
     "left": "+X"
   },
+  "armature": "Boy_Rig",
+  "mesh": "Boy_Mesh",
+  "controls": [
+    "root",
+    "torso",
+    "hips",
+    "chest",
+    "neck",
+    "head",
+    "shoulder.L",
+    "upper_arm_fk.L",
+    "forearm_fk.L",
+    "hand_fk.L",
+    "thigh_fk.L",
+    "shin_fk.L",
+    "foot_fk.L",
+    "toe_fk.L",
+    "shoulder.R",
+    "upper_arm_fk.R",
+    "forearm_fk.R",
+    "hand_fk.R",
+    "thigh_fk.R",
+    "shin_fk.R",
+    "foot_fk.R",
+    "toe_fk.R"
+  ],
   "poses": {
     "rest": {
-      "description": "Default A-pose: arms 45 deg down, feet flat. All values zero.",
+      "description": "Default T-pose: arms 30 deg below horizontal, feet flat. All values zero.",
       "bones": {}
     },
-    "t_pose": {
-      "description": "Arms straight out to the sides.",
+    "a_pose": {
+      "description": "Relaxed stance: arms down by the sides.",
       "bones": {
-        "upper_arm.L": {
+        "upper_arm_fk.L": {
           "rotation_euler_deg": [
-            0.0,
-            0.0,
-            -45.0
+            0,
+            0,
+            -55
           ]
         },
-        "upper_arm.R": {
+        "upper_arm_fk.R": {
           "rotation_euler_deg": [
-            0.0,
-            -0.0,
-            45.0
+            0,
+            0,
+            55
+          ]
+        },
+        "forearm_fk.L": {
+          "rotation_euler_deg": [
+            8,
+            0,
+            0
+          ]
+        },
+        "forearm_fk.R": {
+          "rotation_euler_deg": [
+            8,
+            0,
+            0
           ]
         }
       }
     },
     "wave": {
-      "description": "Right arm raised, forearm up, as in a wave (static key pose).",
+      "description": "Right arm out, forearm straight up, as in a wave (static key pose).",
       "bones": {
+        "upper_arm_fk.R": {
+          "rotation_euler_deg": [
+            0,
+            90,
+            -30
+          ]
+        },
+        "forearm_fk.R": {
+          "rotation_euler_deg": [
+            90,
+            0,
+            0
+          ]
+        },
+        "upper_arm_fk.L": {
+          "rotation_euler_deg": [
+            0,
+            0,
+            -55
+          ]
+        },
         "head": {
           "rotation_euler_deg": [
-            0.0,
-            0.0,
-            -5.711
-          ]
-        },
-        "upper_arm.R": {
-          "rotation_euler_deg": [
-            0.0,
-            74.823,
-            59.036
-          ]
-        },
-        "forearm.R": {
-          "rotation_euler_deg": [
-            -65.432,
-            -0.0,
-            -0.0
+            0,
+            0,
+            8
           ]
         }
       }
@@ -59,53 +106,53 @@
     "shrug": {
       "description": "Shoulders up, forearms out and forward, head tilted.",
       "bones": {
-        "head": {
-          "rotation_euler_deg": [
-            0.0,
-            0.0,
-            -9.841
-          ]
-        },
         "shoulder.L": {
           "rotation_euler_deg": [
-            0.0,
-            -0.0,
-            21.203
-          ]
-        },
-        "upper_arm.L": {
-          "rotation_euler_deg": [
-            -0.0,
-            -31.123,
-            32.672
-          ]
-        },
-        "forearm.L": {
-          "rotation_euler_deg": [
-            -87.683,
-            0.0,
-            0.0
+            25,
+            0,
+            0
           ]
         },
         "shoulder.R": {
           "rotation_euler_deg": [
-            0.0,
-            0.0,
-            -21.203
+            25,
+            0,
+            0
           ]
         },
-        "upper_arm.R": {
+        "upper_arm_fk.L": {
           "rotation_euler_deg": [
-            -0.0,
-            31.123,
-            -32.672
+            0,
+            0,
+            -45
           ]
         },
-        "forearm.R": {
+        "upper_arm_fk.R": {
           "rotation_euler_deg": [
-            -87.683,
-            -0.0,
-            -0.0
+            0,
+            0,
+            45
+          ]
+        },
+        "forearm_fk.L": {
+          "rotation_euler_deg": [
+            70,
+            0,
+            0
+          ]
+        },
+        "forearm_fk.R": {
+          "rotation_euler_deg": [
+            70,
+            0,
+            0
+          ]
+        },
+        "head": {
+          "rotation_euler_deg": [
+            0,
+            0,
+            15
           ]
         }
       }
@@ -113,46 +160,46 @@
     "surprised": {
       "description": "Both hands raised near the face, chest and head leaning back.",
       "bones": {
+        "upper_arm_fk.L": {
+          "rotation_euler_deg": [
+            50,
+            0,
+            -20
+          ]
+        },
+        "upper_arm_fk.R": {
+          "rotation_euler_deg": [
+            50,
+            0,
+            20
+          ]
+        },
+        "forearm_fk.L": {
+          "rotation_euler_deg": [
+            120,
+            0,
+            0
+          ]
+        },
+        "forearm_fk.R": {
+          "rotation_euler_deg": [
+            120,
+            0,
+            0
+          ]
+        },
         "chest": {
           "rotation_euler_deg": [
-            -8.049,
-            -0.0,
-            0.0
+            -15,
+            0,
+            0
           ]
         },
         "head": {
           "rotation_euler_deg": [
-            -9.477,
-            -0.0,
-            -0.0
-          ]
-        },
-        "upper_arm.L": {
-          "rotation_euler_deg": [
-            -13.859,
-            -46.541,
-            5.143
-          ]
-        },
-        "forearm.L": {
-          "rotation_euler_deg": [
-            -103.61,
-            0.0,
-            0.0
-          ]
-        },
-        "upper_arm.R": {
-          "rotation_euler_deg": [
-            -13.859,
-            46.541,
-            -5.143
-          ]
-        },
-        "forearm.R": {
-          "rotation_euler_deg": [
-            -103.61,
-            -0.0,
-            -0.0
+            -12,
+            0,
+            0
           ]
         }
       }
@@ -160,25 +207,32 @@
     "thinking": {
       "description": "Right hand to the chin, head nodded slightly down (approximate).",
       "bones": {
+        "upper_arm_fk.R": {
+          "rotation_euler_deg": [
+            50,
+            0,
+            30
+          ]
+        },
+        "forearm_fk.R": {
+          "rotation_euler_deg": [
+            130,
+            0,
+            0
+          ]
+        },
+        "upper_arm_fk.L": {
+          "rotation_euler_deg": [
+            0,
+            0,
+            -55
+          ]
+        },
         "head": {
           "rotation_euler_deg": [
-            11.535,
-            -0.0,
-            0.0
-          ]
-        },
-        "upper_arm.R": {
-          "rotation_euler_deg": [
-            -38.673,
-            -15.504,
-            -18.363
-          ]
-        },
-        "forearm.R": {
-          "rotation_euler_deg": [
-            -137.738,
-            -0.0,
-            -0.0
+            15,
+            0,
+            0
           ]
         }
       }
@@ -186,72 +240,72 @@
     "point": {
       "description": "Right arm extended forward, pointing.",
       "bones": {
-        "upper_arm.R": {
+        "upper_arm_fk.R": {
           "rotation_euler_deg": [
-            -93.197,
-            9.926,
-            -29.261
+            85,
+            0,
+            -25
           ]
         },
-        "forearm.R": {
+        "upper_arm_fk.L": {
           "rotation_euler_deg": [
-            -6.029,
-            -0.0,
-            -0.0
+            0,
+            0,
+            -55
           ]
         }
       }
     },
     "sit": {
-      "description": "Seated: hips lowered 0.43 m, thighs forward, shins down.",
+      "description": "Seated: torso lowered 0.31 m, thighs forward, shins down.",
       "bones": {
-        "hips": {
+        "torso": {
           "location_m": [
-            0.0,
-            -0.43,
-            0.0
+            0,
+            0,
+            -0.31
           ]
         },
-        "thigh.L": {
+        "thigh_fk.L": {
           "rotation_euler_deg": [
-            90.0,
-            -1.718,
-            0.0
+            -90,
+            0,
+            0
           ]
         },
-        "shin.L": {
+        "thigh_fk.R": {
           "rotation_euler_deg": [
-            -90.0,
-            0.0,
-            0.0
+            -90,
+            0,
+            0
           ]
         },
-        "foot.L": {
+        "shin_fk.L": {
           "rotation_euler_deg": [
-            0.008,
-            0.543,
-            1.63
+            90,
+            0,
+            0
           ]
         },
-        "thigh.R": {
+        "shin_fk.R": {
           "rotation_euler_deg": [
-            90.0,
-            1.718,
-            0.0
+            90,
+            0,
+            0
           ]
         },
-        "shin.R": {
+        "upper_arm_fk.L": {
           "rotation_euler_deg": [
-            -90.0,
-            0.0,
-            0.0
+            0,
+            0,
+            -55
           ]
         },
-        "foot.R": {
+        "upper_arm_fk.R": {
           "rotation_euler_deg": [
-            0.008,
-            -0.543,
-            -1.63
+            0,
+            0,
+            55
           ]
         }
       }
@@ -259,95 +313,88 @@
     "walk_contact": {
       "description": "Walk contact pose: left heel forward, right leg back, arms counter-swinging (approximate).",
       "bones": {
+        "thigh_fk.L": {
+          "rotation_euler_deg": [
+            -25,
+            0,
+            0
+          ]
+        },
+        "shin_fk.L": {
+          "rotation_euler_deg": [
+            5,
+            0,
+            0
+          ]
+        },
+        "foot_fk.L": {
+          "rotation_euler_deg": [
+            -15,
+            0,
+            0
+          ]
+        },
+        "thigh_fk.R": {
+          "rotation_euler_deg": [
+            20,
+            0,
+            0
+          ]
+        },
+        "shin_fk.R": {
+          "rotation_euler_deg": [
+            25,
+            0,
+            0
+          ]
+        },
+        "upper_arm_fk.R": {
+          "rotation_euler_deg": [
+            25,
+            0,
+            45
+          ]
+        },
+        "upper_arm_fk.L": {
+          "rotation_euler_deg": [
+            -25,
+            0,
+            -45
+          ]
+        },
+        "forearm_fk.L": {
+          "rotation_euler_deg": [
+            15,
+            0,
+            0
+          ]
+        },
+        "forearm_fk.R": {
+          "rotation_euler_deg": [
+            15,
+            0,
+            0
+          ]
+        },
+        "chest": {
+          "rotation_euler_deg": [
+            0,
+            0,
+            -10
+          ]
+        },
         "hips": {
+          "rotation_euler_deg": [
+            0,
+            0,
+            10
+          ]
+        },
+        "root": {
           "location_m": [
-            0.0,
-            -0.04,
-            0.0
-          ]
-        },
-        "upper_arm.L": {
-          "rotation_euler_deg": [
-            27.609,
-            13.522,
-            28.858
-          ]
-        },
-        "forearm.L": {
-          "rotation_euler_deg": [
-            -21.713,
-            0.0,
-            0.0
-          ]
-        },
-        "upper_arm.R": {
-          "rotation_euler_deg": [
-            -26.92,
-            5.797,
-            -28.282
-          ]
-        },
-        "forearm.R": {
-          "rotation_euler_deg": [
-            -26.412,
-            -0.0,
-            -0.0
-          ]
-        },
-        "thigh.L": {
-          "rotation_euler_deg": [
-            29.887,
-            -0.0,
-            0.0
-          ]
-        },
-        "shin.L": {
-          "rotation_euler_deg": [
-            -9.464,
-            0.0,
-            0.0
-          ]
-        },
-        "foot.L": {
-          "rotation_euler_deg": [
-            -9.901,
-            -0.0,
-            -0.0
-          ]
-        },
-        "toe.L": {
-          "rotation_euler_deg": [
-            30.324,
-            -0.0,
-            0.0
-          ]
-        },
-        "thigh.R": {
-          "rotation_euler_deg": [
-            -23.499,
-            -0.0,
-            0.0
-          ]
-        },
-        "shin.R": {
-          "rotation_euler_deg": [
-            -25.154,
-            0.0,
-            0.0
-          ]
-        },
-        "foot.R": {
-          "rotation_euler_deg": [
-            -30.217,
-            -0.0,
-            -0.0
-          ]
-        },
-        "toe.R": {
-          "rotation_euler_deg": [
-            -18.435,
-            -0.0,
-            -0.0
+            0,
+            0,
+            0.064
           ]
         }
       }

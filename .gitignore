@@ -7,3 +7,7 @@ __pycache__/
 rig/out/
 out/
 .DS_Store
+
+# artist source file for the rig (not part of the candidate kit)
+rig/Boy_riggblend.blend
+*.blend1

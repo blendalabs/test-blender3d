@@ -10,12 +10,12 @@ Welcome, and thanks for taking the time. This test mirrors the kind of work we d
 
 - An LLM API key with a spending cap. Never commit it to the repo; load it from an environment variable.
 - The starter rig, in [`rig/`](rig/):
-  - [`humanoid_rig.blend`](rig/humanoid_rig.blend): armature `Humanoid_Rig` (22 named bones) and mesh `Humanoid_Mesh`, in an A-pose.
-  - [`REFERENCE.md`](rig/REFERENCE.md): conventions, bone table, rotation limits, and which way each axis moves each bone. Read this first.
-  - [`poses.json`](rig/poses.json): nine reference poses (`rest`, `t_pose`, `wave`, `shrug`, `surprised`, `thinking`, `point`, `sit`, `walk_contact`) as per-bone Euler rotations in degrees. You may use them as a pose library or as examples for your prompt.
+  - [`Boy_rig.blend`](rig/Boy_rig.blend): the character "Boy". Armature `Boy_Rig` with 22 animation controls, mesh `Boy_Mesh`, and a scene that is ready to render: a camera, three area lights and a floor (Eevee, 1920x1080, 24 fps, frames 1-96).
+  - [`REFERENCE.md`](rig/REFERENCE.md): conventions, the control table, rotation limits, and which way each axis moves each control. Read this first.
+  - [`poses.json`](rig/poses.json): nine reference poses (`rest`, `a_pose`, `wave`, `shrug`, `surprised`, `thinking`, `point`, `sit`, `walk_contact`) as per-control Euler rotations in degrees. You may use them as a pose library or as examples for your prompt.
   - [`pose_sheet.png`](rig/pose_sheet.png): a preview of all nine poses.
 
-![Pose sheet: rest, t_pose, wave, shrug, surprised, thinking, point, sit, walk_contact](rig/pose_sheet.png)
+![Pose sheet: rest, a_pose, wave, shrug, surprised, thinking, point, sit, walk_contact](rig/pose_sheet.png)
 
 ## Setup
 
@@ -24,25 +24,33 @@ Welcome, and thanks for taking the time. This test mirrors the kind of work we d
 - Verify the rig loads:
 
   ```bash
-  python -c "import bpy; bpy.ops.wm.open_mainfile(filepath='rig/humanoid_rig.blend'); print([b.name for b in bpy.data.objects['Humanoid_Rig'].pose.bones])"
+  python -c "import bpy, json; bpy.ops.wm.open_mainfile(filepath='rig/Boy_rig.blend'); rig = bpy.data.objects['Boy_Rig']; print([n for n in json.load(open('rig/poses.json'))['controls'] if n in rig.pose.bones])"
   ```
 
-- Rendering works headless with the `bpy` module. The Eevee engine needs a working GPU/OpenGL driver; if it fails on your machine, Cycles on CPU works (slower) and is fine for this test.
+- Render a still from the scene's camera:
+
+  ```bash
+  python -c "import bpy, os; bpy.ops.wm.open_mainfile(filepath='rig/Boy_rig.blend'); bpy.context.scene.render.filepath = os.path.abspath('render.png'); bpy.ops.render.render(write_still=True)"
+  ```
+
+- Rendering works headless with the `bpy` module. The Eevee engine needs a working GPU/OpenGL driver; if it fails on your machine, switch `scene.render.engine` to `CYCLES` (CPU, slower), which is fine for this test.
 
 ## Rig rules
 
 The details are in [`rig/REFERENCE.md`](rig/REFERENCE.md); the essentials:
 
-- Z is up, the character faces -Y, and the character's left side is +X (bones ending in `.L`).
-- All pose bones use Euler XYZ, local rotations. Use degrees in your JSON and convert to radians for Blender.
-- Only `root` and `hips` take location; every other bone is rotation only.
-- Elbows and knees bend in negative X. Limit Rotation constraints enforce joint limits and clamp values outside them. Do not remove the constraints; your validation should handle limits before they are hit.
+- Z is up, the character faces -Y, and the character's left side is +X (controls ending in `.L`).
+- The rig has 269 bones, but you animate only the **22 controls** listed in `rig/REFERENCE.md` (`root`, `torso`, `hips`, `chest`, `neck`, `head`, and per side `shoulder`, `upper_arm_fk`, `forearm_fk`, `hand_fk`, `thigh_fk`, `shin_fk`, `foot_fk`, `toe_fk`). Leave the other bones alone.
+- The 22 controls use Euler XYZ, local rotations. Use degrees in your JSON and convert to radians for Blender.
+- Only `root` and `torso` take location; every other control is rotation only.
+- The limbs are set to FK. Do not change the `IK_FK` properties, or the `*_fk` controls stop working.
+- Elbows and knees bend in **positive** X (the opposite sign from many rigs). Limit Rotation constraints enforce joint limits and clamp values outside them. Do not remove the constraints; your validation should handle limits before they are hit.
 
 ## Core requirements
 
 1. **Prompt input:** a simple UI (web, CLI, or Blender add-on panel, your choice).
 2. **AI layer:** the LLM must return *structured data* (e.g. JSON with bone rotations, timing and easing), not freeform Python. Validate it before use.
-3. **Blender layer:** a `bpy` script (headless or add-on) reads that data and inserts keyframes on the humanoid's bones, with easing and sensible limits so limbs don't break.
+3. **Blender layer:** a `bpy` script (headless or add-on) reads that data and inserts keyframes on the character's controls, with easing and sensible limits so limbs don't break.
 4. **Output:** a playable preview (viewport capture or Eevee render, 3-5 seconds).
 5. **Failure handling:** bad LLM output, impossible poses and ambiguous prompts should fail gracefully.
 
